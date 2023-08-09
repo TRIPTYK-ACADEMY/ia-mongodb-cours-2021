@@ -33,3 +33,5 @@ for (let i = 0; i < 10; i++){
         code: `${i.toString()}`,
     })
 }
+
+db.classrooms.insertMany(classrooms);
