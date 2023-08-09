@@ -31,7 +31,7 @@ const toInsert = [
 const multiResults = db.classrooms.insterMany(toInsert);
 const classrooms = [];
 
-for (let i = 0; i < 10; i++){
+for (let i = 0; i < 100; i++){
     classrooms.push({
         code: `${i.toString()}`,
     })
