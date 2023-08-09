@@ -61,3 +61,10 @@ classrooms
 > `bash <script.sh>`
 
 Permet de langer un script dispo dans le workspace
+
+Executer un script via mongosh = 
+`load ('/scripts/coucou.js');`
+ou
+`mongosh -nodb --file scripts/coucou.js`
+
+
