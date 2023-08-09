@@ -1,3 +1,6 @@
+
+// INSERT ONE + INSERT MANY
+
 let db = connect("mongodb://root:test123*@localhost:27017");
 
 // URL <protocol>:<username>:<password>@<host>:<port>
@@ -35,3 +38,4 @@ for (let i = 0; i < 10; i++){
 }
 
 db.classrooms.insertMany(classrooms);
+
