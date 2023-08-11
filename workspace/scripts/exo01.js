@@ -1,15 +1,46 @@
-let db = connect("mongodb://root:test123*@localhost:27017");
+let db = connect("mongodb://root:test123*@localhost:27017")
+    .getSiblingDB("sample_mflix");
 
-db = db.getSiblingDB("sample_mflix");
-
-const movies = db.movies.find({
+const keanuReavesFilms = db.movies.find({
     cast: "Keanu Reeves",
 }).projection({
     title: 1,
     _id : 0,
 })
 
-console.log(movies);
+console.log(keanuReavesFilms);
+
+
+const comedies = db.movies.find({
+    genres: 'Comedy',
+}).projection({
+    genres: 1,
+    title:  1,
+    _id: 0,
+});
+
+console.log(comedies);
+
+
+const between2002And2008 = db.movies.find({
+    year: {
+        $gte: 2002,
+        $lte: 2008,
+    }
+}).sort({
+    year: 1,
+});
+
+console.log(between2002And2008);
+
+
+const mattDiamant = db.movies.find({
+    cast: {
+        $all: [`Chris O\'Donnell`, 'Matt Damon']
+    }
+});
+
+console.log(mattDiamant);
 
 
 
