@@ -2,27 +2,14 @@ let db = connect("mongodb://root:test123@localhost");
 // équivalent du "use technocite"
 db = db.getSiblingDB("technocite");
 
-// on va insérer dans "students" amaury
-const newStudent = db.students.insertOne({
-    name : "Amaury petit"
+db.formators.insertOne({
+    name : "Seb"
 });
 
-console.log(newStudent);
+// on va chercher les formateurs
+const formateurs = db.formators.find({
+    name : "Seb"
+});
+// SELECT * FROM formators WHERE name="Seb";
 
-const newStudents = db.students.insertMany([
-    {
-        name : "Amaury grand"
-    },
-    {
-        name : "Amaury moyen"
-    }
-]);
-
-// snake_case
-// camelCase
-// PascalCase
-// SCREAMINGCASE
-// kebab-case
-// Sponge
-
-console.log(newStudents);
+console.log(formateurs);
