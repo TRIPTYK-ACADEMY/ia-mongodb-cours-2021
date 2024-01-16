@@ -2,39 +2,37 @@ let db = connect("mongodb://root:test123@localhost");
 // équivalent du "use technocite"
 db = db.getSiblingDB("sample_mflix");
 
-let jurassic = db.movies.find({
-    title: "Jurassic Park"
-});
-
-let jurassic2 = db.movies.find({
-    title: {
-        $ne: "Jurassic Park"
+db.movies.aggregate([
+    {
+        $match: {
+            'imdb.rating': {
+                $lt: 5
+            }
+        }
+    },
+    {
+        $unwind: '$directors'
+    },
+    {
+        $group: {
+            _id: '$directors',
+            total: {
+                $count: {}
+            }
+        }
+    },
+    {
+        $sort: {
+            total: -1
+        }
+    },
+    {
+        $limit: 10
+    },
+    {
+        $out : {
+            db: 'sample_mflix',
+            coll: 'lame_directors'
+        }
     }
-});
-
-// console.log(jurassic2);
-
-let sousChamp = db.movies.find({
-    'tomatoes.viewer.numReviews': {
-        $gt: 500
-    }
-});
-
-// console.log(sousChamp);
-
-let georgeLucasFilms = db.movies.find({
-    directors: {
-        $in : ['George Lucas']
-    }
-});
-
-// console.log(georgeLucasFilms);
-
-
-let georgeAndSpielberg = db.movies.find({
-    cast: {
-        $all : ['Ewan McGregor','Natalie Portman']
-    }
-});
-
-console.log(":( ",georgeAndSpielberg);
+]);
