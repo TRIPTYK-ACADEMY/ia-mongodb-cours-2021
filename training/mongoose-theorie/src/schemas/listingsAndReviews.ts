@@ -57,6 +57,8 @@ const schema = new Schema({
     amenities: {
         type: [String]
     }
+}, {
+    strict: true
 });
 
 export const ListingAndReviews = model('listingsAndReviews', schema, 'listingsAndReviews');
